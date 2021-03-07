@@ -1,13 +1,22 @@
 let ulTasks = $('#ulTasks')
 let btnAdd = $('#btnAdd')
-let btnClear = $('#btnClear')
+let btnReset = $('#btnReset')
 let inpNewTask = $('#inpNewTask')
-btnAdd.click(()=>{
+
+function addItem(){
     let listItem = $('<li>',{
         'class':'list-group-item',
         text:inpNewTask.val()
     })
+    listItem.click(()=>{
+        listItem.toggleClass('done')
+    })
     ulTasks.append(listItem)
     inpNewTask.val("");
+}
+
+inpNewTask.keypress((e)=>{
+    if(e.which==13) addItem()
 })
-btnClear.click(()=>inpNewTask.val(""))
+btnAdd.click(addItem)
+btnReset.click(()=>inpNewTask.val(""))
